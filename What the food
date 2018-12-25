@@ -1,0 +1,125 @@
+using System;
+using IronOcr;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace OCR
+{	
+	public partial class Form1 : Form
+	{
+		String filename;
+		public Form1()
+		{
+			InitializeComponent();
+		}
+		private void button1_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog op = new OpenFileDialog();
+			if (op.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				filename = op.FileName;
+			}
+			pictureBox1.ImageLocation = filename;
+			var Ocr = new AutoOcr()
+			{
+				Language = IronOcr.Languages.Thai.OcrLanguagePack,
+				//...
+			};
+			var Result = Ocr.Read(filename);
+			richTextBox1.Text = Result.Text;
+			if (richTextBox1.Text == "แกงอ่อมหมู")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Oom;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)"+"\n"+"1.เนื้อหมู(Pork)"+"\n"
+					+"2.ตับหมู(Liver)"+"\n"+"3.หัวใจหมู(Heart)";
+			}
+			else if(richTextBox1.Text == "แกงฮังเล")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Hung;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.เนื้อหมู(Pork)" + "\n"
+					+ "2.ขิง(Ginger)" + "\n" + "3.มันฝรั่ง(Potatos)";
+			}
+			else if (richTextBox1.Text == "แอบอ่องออ")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Ongor;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.สมองหมู(Pork brain)" 
+					+ "\n" + "2.ขมิ้น(Turmeric)" + "\n" + "3.ตะไคร้(Lemon grass)";
+			}
+			else if (richTextBox1.Text == "น้ำพริกอ่อง")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.PrigOng;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.เนื้อหมู(Pork)" + "\n" 
+					+ "2.มะเขือเทศ(Tomatos)" + "\n" + "3.ต้นหอม(Green Onion)";
+			}
+			else if (richTextBox1.Text == "กบทอด")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Kob;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.กบ(Frog)" + "\n" + "2.น้ำมัน(Oil)"; 
+			}
+			else if (richTextBox1.Text == "หมกปลา")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Mokpla;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.ปลา(Fish)" + "\n" + "2.ตะไคร้(Lemon grass)" 
+					+ "\n" + "3.ขมิ้น(Turmeric)";
+			}
+			else if (richTextBox1.Text == "แกงบอน")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Bon;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.ใบบอน(Caladium)" + "\n" + "2.มะกอก(Olive)" + "\n" 
+					+ "3.แคบหมู(Crispy pork)";
+			}
+			else if (richTextBox1.Text == "แกงโฮะ")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.GangHo;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.หมู(Pork)" + "\n" + "2.ผักต่างๆ(Various vegetables)" 
+					+ "\n" + "3.แกงฮังเล(Gang Hunglae)" + "\n" + "4.วุ้นเส้น(Vermicelli)";
+			}
+			else if (richTextBox1.Text == "อ่องปู")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+				pictureBox2.BackgroundImage = Properties.Resources.OngPoo;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.มันปู(Egg crab)" + "\n" + "2.ไข่(Egg)";
+			}
+			else if (richTextBox1.Text == "ลาบปลา")
+			{
+				pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+				pictureBox2.BackgroundImage = Properties.Resources.Labpla;
+				richTextBox2.Text = "ส่วนประกอบสำคัญ (Ingredients)" + "\n" + "1.ปลา(Fish)" 
+					+ "\n" + "2.พริก(Chilli)" + "\n" + "3.ข้าวคั่ว(Roasted rice)";
+			}
+		}
+		private void Form1_Load(object sender, EventArgs e)
+		{
+			// TODO: This line of code loads data into the 'foodListDataSet1.FoodList' table. You can move, or remove it, as needed.
+			this.foodListTableAdapter.Fill(this.foodListDataSet1.FoodList);
+
+		}
+
+		private void foodListBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+		{
+			this.Validate();
+			this.foodListBindingSource.EndEdit();
+			this.tableAdapterManager.UpdateAll(this.foodListDataSet1);
+
+		}
+
+		private void label1_Click(object sender, EventArgs e)
+		{
+
+		}
+	}
+}
